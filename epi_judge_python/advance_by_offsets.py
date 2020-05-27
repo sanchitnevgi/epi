@@ -4,8 +4,13 @@ from test_framework import generic_test
 
 
 def can_reach_end(A: List[int]) -> bool:
-    # TODO - you fill in here.
-    return True
+    last_reachable_idx = len(A) - 1
+
+    for i in reversed(range(len(A) - 1)):
+        if A[i] + i >= last_reachable_idx:
+            last_reachable_idx = i
+
+    return last_reachable_idx == 0
 
 
 if __name__ == '__main__':

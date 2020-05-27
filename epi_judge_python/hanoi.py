@@ -9,8 +9,12 @@ NUM_PEGS = 3
 
 
 def compute_tower_hanoi(num_rings: int) -> List[List[int]]:
-    # TODO - you fill in here.
-    return []
+    def moves(n_rings, fr, to, free):
+        if n_rings == 1:
+            return [(fr, to)]
+        return moves(n_rings - 1, fr, free, to) + [(fr, to)] + moves(n_rings - 1, free, to, fr)
+
+    return moves(num_rings, 0, 2, 1)
 
 
 @enable_executor_hook
