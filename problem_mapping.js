@@ -334,7 +334,7 @@ problem_mapping = {
                 "total": 2001
             },
             "Python: next_permutation.py": {
-                "passed": 0,
+                "passed": 2001,
                 "total": 2001
             }
         },
@@ -2594,7 +2594,7 @@ problem_mapping = {
                 "total": 1001
             },
             "Python: first_missing_positive_entry.py": {
-                "passed": 0,
+                "passed": 1001,
                 "total": 1001
             }
         },
