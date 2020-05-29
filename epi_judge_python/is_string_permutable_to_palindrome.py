@@ -1,9 +1,11 @@
 from test_framework import generic_test
-
+from collections import Counter
 
 def can_form_palindrome(s: str) -> bool:
-    # TODO - you fill in here.
-    return True
+    count = Counter(s)
+    ones = sum([value for key, value in count.items() if value == 1])
+
+    return ones <= 1
 
 
 if __name__ == '__main__':
