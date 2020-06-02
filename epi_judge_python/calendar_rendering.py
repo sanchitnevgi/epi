@@ -1,5 +1,6 @@
 import collections
 import functools
+import heapq
 from typing import List
 
 from test_framework import generic_test
@@ -10,8 +11,18 @@ Event = collections.namedtuple('Event', ('start', 'finish'))
 
 
 def find_max_simultaneous_events(A: List[Event]) -> int:
-    # TODO - you fill in here.
-    return 0
+    # Sort by starting times
+    A.sort()
+
+    ending_times = []
+    
+    for start_time, end_time in A:
+        if len(ending_times) == 0 or start_time <= ending_times[0]: # Add a new meeting room
+            heapq.heappush(ending_times, end_time)
+        else: # Can reuse meeting room
+            heapq.heapreplace(ending_times, end_time)
+
+    return len(ending_times)
 
 
 @enable_executor_hook
