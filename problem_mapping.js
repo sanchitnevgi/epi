@@ -1718,7 +1718,7 @@ problem_mapping = {
                 "total": 191
             },
             "Python: intervals_union.py": {
-                "passed": 0,
+                "passed": 191,
                 "total": 191
             }
         },
@@ -1732,7 +1732,7 @@ problem_mapping = {
                 "total": 33
             },
             "Python: group_equal_entries.py": {
-                "passed": 0,
+                "passed": 33,
                 "total": 33
             }
         },
@@ -1746,7 +1746,7 @@ problem_mapping = {
                 "total": 105
             },
             "Python: is_array_dominated.py": {
-                "passed": 0,
+                "passed": 105,
                 "total": 105
             }
         },
