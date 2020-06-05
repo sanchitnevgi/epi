@@ -4,8 +4,17 @@ from test_framework import generic_test
 
 
 def search_smallest(A: List[int]) -> int:
-    # TODO - you fill in here.
-    return 0
+    lo, hi = 0, len(A) - 1
+
+    while lo < hi:
+        mid = (lo + hi) // 2
+
+        if A[mid] > A[hi]:
+            lo = mid + 1
+        else: # A[mid] <  A[hi]
+            hi = mid
+    
+    return lo
 
 
 if __name__ == '__main__':
