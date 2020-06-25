@@ -1,23 +1,32 @@
+from collections import namedtuple
+
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
-
 class Stack:
+
+    def __init__(self):
+        self._stack = []
+        self._max = []
+
     def empty(self) -> bool:
-        # TODO - you fill in here.
-        return True
+        return len(self._stack) == 0
 
     def max(self) -> int:
-        # TODO - you fill in here.
-        return 0
+        return self._max[-1]
 
     def pop(self) -> int:
-        # TODO - you fill in here.
-        return 0
+        popped = self._stack.pop()
+        if popped == self._max[-1]:
+            self._max.pop()
+        return popped
 
     def push(self, x: int) -> None:
-        # TODO - you fill in here.
-        return
+        self._stack.append(x)
+        if len(self._max) == 0:
+            self._max.append(x)
+        elif x >= self._max[-1]:
+            self._max.append(x)
 
 
 def stack_tester(ops):
