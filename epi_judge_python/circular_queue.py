@@ -3,21 +3,37 @@ from test_framework.test_failure import TestFailure
 
 
 class Queue:
+    SCALE_FACTOR = 2
     def __init__(self, capacity: int) -> None:
-        # TODO - you fill in here.
-        return
-
+        self.entries = [None] * capacity
+        self.head = self.tail = self.num_elements = 0
+    
     def enqueue(self, x: int) -> None:
-        # TODO - you fill in here.
-        return
+        # If the queue is full
+        if self.num_elements == len(self.entries):
+            # Make the entries contiguous
+            self.entries = self.entries[self.head:] + self.entries[:self.head]
+
+            # Increase the capacity
+            self.entries += [None] * (len(self.entries) * Queue.SCALE_FACTOR - len(self.entries))
+
+            # Reset the head, tail
+            self.head, self.tail = 0, self.num_elements
+
+
+        self.entries[self.tail] = x
+        self.tail = (self.tail + 1) % len(self.entries)
+        self.num_elements += 1
 
     def dequeue(self) -> int:
-        # TODO - you fill in here.
-        return 0
+        self.num_elements -= 1
+        result = self.entries[self.head]
+        self.head = (self.head + 1) % len(self.entries)
+
+        return result
 
     def size(self) -> int:
-        # TODO - you fill in here.
-        return 0
+        return self.num_elements    
 
 
 def queue_tester(ops):
