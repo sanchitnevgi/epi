@@ -9,13 +9,22 @@ NUM_PEGS = 3
 
 
 def compute_tower_hanoi(num_rings: int) -> List[List[int]]:
-    def moves(n_rings, fr, to, free):
-        if n_rings == 1:
-            return [(fr, to)]
-        return moves(n_rings - 1, fr, free, to) + [(fr, to)] + moves(n_rings - 1, free, to, fr)
+    def get_moves(rings, from_peg, to_peg, vacant_peg):
+        if rings == 1:
+            return [(from_peg, to_peg)]
+        
+        # Move the top n-1 rings to vacant peg
+        moves = get_moves(rings - 1, from_peg, vacant_peg, to_peg)
 
-    return moves(num_rings, 0, 2, 1)
+        # Move the nth ring to to peg
+        moves += [(from_peg, to_peg)]
 
+        # Move the top n-1 rings from the vacant peg to to_peg
+        moves += get_moves(rings - 1, vacant_peg, to_peg, from_peg)
+
+        return moves
+
+    return get_moves(num_rings, 0, 1, 2)
 
 @enable_executor_hook
 def compute_tower_hanoi_wrapper(executor, num_rings):

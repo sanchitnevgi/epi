@@ -14,9 +14,32 @@ Coordinate = collections.namedtuple('Coordinate', ('x', 'y'))
 
 def search_maze(maze: List[List[int]], s: Coordinate,
                 e: Coordinate) -> List[Coordinate]:
-    # TODO - you fill in here.
-    return []
+    WHITE, BLACK = range(2)
+    ROWS, COLS = len(maze), len(maze[0])
 
+    path = []
+    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+    def maze_helper(node):
+        # Check if valid node
+        if not (0 <= node.x < ROWS and 0 <= node.y < COLS and maze[node.x][node.y] == WHITE):
+            return False
+        
+        path.append(node)
+        maze[node.x][node.y] = BLACK
+
+        if node == e:
+            return True
+
+        if any(maze_helper(Coordinate(node.x + dx, node.y + dy)) for dx, dy in directions):
+            return True
+
+        del path[-1]
+        return False
+
+    maze_helper(s)
+
+    return path
 
 def path_element_is_feasible(maze, prev, cur):
     if not ((0 <= cur.x < len(maze)) and
