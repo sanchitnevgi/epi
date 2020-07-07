@@ -20,7 +20,6 @@ def flip_color(x: int, y: int, image: List[List[bool]]) -> None:
 
     flip_helper(x, y)
 
-
 def flip_color_wrapper(x, y, image):
     flip_color(x, y, image)
     return image
