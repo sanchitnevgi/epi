@@ -7,6 +7,23 @@ from test_framework import generic_test
 
 def merge_two_sorted_lists(L1: Optional[ListNode],
                            L2: Optional[ListNode]) -> Optional[ListNode]:
+    dummy_head = tail = ListNode()
+
+    while L1 and L2:
+        # Make L1 smaller
+        if L1.data > L2.data:
+            L1, L2 = L2, L1    
+
+        tail.next, L1 = L1, L1.next
+        tail = tail.next
+
+    tail.next = L1 or L2
+    
+    return dummy_head.next
+    
+
+def merge_two_sorted_lists_heap(L1: Optional[ListNode],
+                           L2: Optional[ListNode]) -> Optional[ListNode]:
     Item = collections.namedtuple('Item', ['val', 'list_idx'])
     head, curr = None, None
     lists = [L1, L2]

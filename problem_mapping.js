@@ -676,15 +676,15 @@ problem_mapping = {
                 "total": 505
             },
             "Python: delete_from_list.py": {
-                "passed": 0,
+                "passed": 457,
                 "total": 457
             },
             "Python: insert_in_list.py": {
-                "passed": 0,
+                "passed": 504,
                 "total": 504
             },
             "Python: search_in_list.py": {
-                "passed": 0,
+                "passed": 505,
                 "total": 505
             }
         },
@@ -712,7 +712,7 @@ problem_mapping = {
                 "total": 210
             },
             "Python: reverse_sublist.py": {
-                "passed": 0,
+                "passed": 210,
                 "total": 210
             }
         },
@@ -726,7 +726,7 @@ problem_mapping = {
                 "total": 102
             },
             "Python: is_list_cyclic.py": {
-                "passed": 0,
+                "passed": 102,
                 "total": 102
             }
         },
