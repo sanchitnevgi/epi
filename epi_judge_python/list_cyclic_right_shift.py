@@ -5,8 +5,23 @@ from test_framework import generic_test
 
 
 def cyclically_right_shift_list(L: ListNode, k: int) -> Optional[ListNode]:
-    # TODO - you fill in here.
-    return None
+    if L is None:
+        return L
+    dummy = node_iter = ListNode(0, L)
+    # Find the k+1 th last node
+    for _ in range(k):
+        node_iter = node_iter.next
+    
+    head = node_iter.next
+    node_iter.next = None
+
+    end_node = head
+    while end_node.next:
+        end_node = end_node.next
+
+    end_node.next = L
+    
+    return head
 
 
 if __name__ == '__main__':
