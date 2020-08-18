@@ -7,24 +7,25 @@ from test_framework.test_utils import enable_executor_hook
 
 NUM_PEGS = 3
 
-
 def compute_tower_hanoi(num_rings: int) -> List[List[int]]:
-    def get_moves(rings, from_peg, to_peg, vacant_peg):
-        if rings == 1:
+    def compute_moves(n, from_peg, to_peg, free_peg):
+        # Base case
+        if n == 1:
             return [(from_peg, to_peg)]
         
-        # Move the top n-1 rings to vacant peg
-        moves = get_moves(rings - 1, from_peg, vacant_peg, to_peg)
-
-        # Move the nth ring to to peg
-        moves += [(from_peg, to_peg)]
-
-        # Move the top n-1 rings from the vacant peg to to_peg
-        moves += get_moves(rings - 1, vacant_peg, to_peg, from_peg)
+        moves = (
+            # Move the top n-1 rings to the free peg
+            compute_moves(n - 1, from_peg, free_peg, to_peg) 
+            # Move the nth ring to the correct peg
+            + [(from_peg, to_peg)]
+            # Move the n-1 rings from the free pg to the to_peg
+            + compute_moves(n - 1, free_peg, to_peg, from_peg)
+        )
 
         return moves
+    
+    return compute_moves(num_rings, 0, 1, 2)
 
-    return get_moves(num_rings, 0, 1, 2)
 
 @enable_executor_hook
 def compute_tower_hanoi_wrapper(executor, num_rings):

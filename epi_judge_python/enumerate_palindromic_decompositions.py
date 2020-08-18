@@ -4,27 +4,20 @@ from test_framework import generic_test
 
 
 def palindrome_decompositions(text: str) -> List[List[str]]:
-    palindromes = set()
-    
-    def get_palindromes(lo, hi):
-        if lo > hi:
+    def decomposition(offset, partial):
+        if offset == len(text):
+            result.append(partial.copy())
             return
-
-        mid = (lo + hi) // 2
-
-        # Add the single character
-        palindromes.add(text[mid])
-
-        # Get palindromes from the left half
-        palindromes_left = get_palindromes(lo, mid - 1)
-
-        # Get palindromes from the right half
-        palindromes_right = get_palindromes(mid + 1, hi)
-
-        # Get palindromes starting from the center
-        
-
-    return []
+        # Find all palindromes starting from offset and recurse
+        for i in range(offset + 1, len(text) + 1):
+            # Palindrome check
+            prefix = text[offset:i]
+            if prefix == prefix[::-1]:
+                decomposition(i, partial + [prefix])
+    
+    result = []
+    decomposition(0, [])
+    return result
 
 
 def comp(a, b):

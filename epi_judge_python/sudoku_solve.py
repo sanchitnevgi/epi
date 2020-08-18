@@ -9,8 +9,46 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def solve_sudoku(partial_assignment: List[List[int]]) -> bool:
-    # TODO - you fill in here.
-    return True
+    def get_next_cell(row, col):
+        next_col = (col + 1) % 9        
+        next_row = row + 1 if next_col == 0 else row
+
+        return next_row, next_col
+
+    def can_solve(row, col):
+        # Filled all squares, solvable
+        if row == len(partial_assignment):
+            return True
+        
+        # If already filled,  continue with next assignment
+        if partial_assignment[row][col] != 0:
+            return can_solve(*get_next_cell(row, col))
+
+        # Find all valid positions
+        possible = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+
+        # Remove all elements from the current row
+        possible.difference_update(partial_assignment[row])
+
+        # Remove all elements from the current column
+        possible.difference_update([row[col] for row in partial_assignment])
+
+        # Remove all elements from the grid
+        grid_x, grid_y = row // 3, col // 3
+        grid_values = [partial_assignment[x][y] for x in range(grid_x * 3, grid_x * 3 + 3) for y in range(grid_y * 3, grid_y * 3 + 3) ]
+        possible.difference_update(grid_values)
+        
+        for assignment in possible:
+            partial_assignment[row][col] = assignment
+            
+            if can_solve(*get_next_cell(row, col)):
+                return True
+
+            partial_assignment[row][col] = 0
+
+        return False
+
+    return can_solve(0, 0)
 
 
 def assert_unique_seq(seq):

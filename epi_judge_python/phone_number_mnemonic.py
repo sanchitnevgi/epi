@@ -4,25 +4,22 @@ from test_framework import generic_test, test_utils
 
 
 def phone_mnemonic(phone_number: str) -> List[str]:
-    if not phone_number:
-        return []
     mapping = ("0", "1", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ")
 
-    digit, suffix = int(phone_number[0]), phone_number[1:]
-    def traverse(pnemonics, suffix):
-        if not suffix:
-            return pnemonics
-        
-        digit = int(suffix[0])
-        values = []
-        for pnemonic in pnemonics:
-            for char in mapping[digit]:
-                values.append(pnemonic + char)
+    def recurse(i):
+        if i == len(phone_number):
+            result.append("".join(partial))
+            return
+        for char in mapping[int(phone_number[i])]:
+            partial[i] = char
+            recurse(i + 1)
+    
+    result = []
+    partial = [0] * len(phone_number)
 
-        return traverse(values, suffix[1:])
+    recurse(0)
 
-    return traverse(list(mapping[digit]), suffix)
-
+    return result
 
 if __name__ == '__main__':
     exit(

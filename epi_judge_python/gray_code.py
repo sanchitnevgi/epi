@@ -7,9 +7,20 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def gray_code(num_bits: int) -> List[int]:
-    # TODO - you fill in here.
-    return []
+    if num_bits == 0:
+        return [0]
+    
+    codes = gray_code(num_bits - 1)
 
+    return codes + [ 2 ** (num_bits - 1) + code for code in reversed(codes) ] 
+
+def differ_by_1_bit(a, b):
+    x = a ^ b
+    if x == 0:
+        return False
+    while x & 1 == 0:
+        x >>= 1
+    return x == 1
 
 @enable_executor_hook
 def gray_code_wrapper(executor, num_bits):
