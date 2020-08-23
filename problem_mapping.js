@@ -2198,7 +2198,7 @@ problem_mapping = {
                 "total": 5906
             },
             "Python: binomial_coefficients.py": {
-                "passed": 0,
+                "passed": 5906,
                 "total": 5906
             }
         },
@@ -2212,7 +2212,7 @@ problem_mapping = {
                 "total": 186
             },
             "Python: is_string_in_matrix.py": {
-                "passed": 0,
+                "passed": 186,
                 "total": 186
             }
         },
@@ -2240,7 +2240,7 @@ problem_mapping = {
                 "total": 41
             },
             "Python: is_string_decomposable_into_words.py": {
-                "passed": 0,
+                "passed": 41,
                 "total": 41
             }
         },
@@ -2282,7 +2282,7 @@ problem_mapping = {
                 "total": 546
             },
             "Python: number_of_traversals_staircase.py": {
-                "passed": 0,
+                "passed": 546,
                 "total": 546
             }
         },
@@ -2310,7 +2310,7 @@ problem_mapping = {
                 "total": 200
             },
             "Python: longest_nondecreasing_subsequence.py": {
-                "passed": 0,
+                "passed": 200,
                 "total": 200
             }
         }

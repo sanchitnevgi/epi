@@ -5,32 +5,44 @@ from test_framework import generic_test
 
 def is_pattern_contained_in_grid(grid: List[List[int]],
                                  pattern: List[int]) -> bool:
-    prev_max_length = [ [0] * len(grid[0]) for _ in range(len(grid)) ]
-    n, m = len(grid), len(grid[0])
+    rows, cols = len(grid), len(grid[0])
 
-    for idx, dig in enumerate(pattern):
-        pattern_len = idx + 1
-        max_length_found = [ [0] * len(grid[0]) for _ in range(len(grid)) ]
-        for i, j in product(range(n), range(m)):
-            if pattern_len == 1:
-                max_length_found[i][j] = pattern_len if grid[i][j] == dig else 0
-            else:
-                # 2 or longer, find cells with value == pattern_len - 1 and check its neighbours
-                
-                if prev_max_length[i][j] == pattern_len - 1:
-                    # Check neighbours
-                    for nx, ny in [(i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1)]:
-                        # Not a valid neighbour
-                        if not (0 <= nx < n and 0 <= ny < m):
-                            continue
+    # Error condition
+    if not pattern:
+        return True
 
-                        # If neighbour is the next in pattern, mark it
-                        if grid[nx][ny] == dig:
-                            max_length_found[nx][ny] = pattern_len
-            prev_max_length = max_length_found
+    if not rows or not cols:
+        return False
 
-    # Check if full pattern length exits
-    return any([ len(pattern) == max_length_found[i][j] for i in range(n) for j in range(m) ])
+    # Set flags for 1st char in pattern
+    len_n_pattern = [[grid[r][c] == pattern[0] for c  in range(cols) ] for r in range(rows)]
+
+    # Go over rest of the pattern and modify
+    for char in pattern[1:]:
+        # Keep the current pattern
+        next_len = [[False] * cols for _ in range(rows)]
+
+        # Check neighbours of each cell in grid
+        for row, col in product(range(rows), range(cols)):
+            # If cell is not char, continue
+            if grid[row][col] is not char:
+                continue
+
+            for nx, ny in [(row + 1, col), (row - 1, col), (row, col + 1), (row, col - 1)]:
+                # Check if valid neighbour
+                if not (0 <= nx < rows and 0 <= ny < cols):
+                    continue
+
+                # The pattern upto length exists
+                if len_n_pattern[nx][ny]:
+                    next_len[row][col] = True
+                    # No need to check more neighbours
+                    break
+        
+        # Update the len_n_pattern
+        len_n_pattern = next_len
+
+    return any(len_n_pattern[r][c] for r in range(rows) for c in range(cols))
                      
 if __name__ == '__main__':
     exit(

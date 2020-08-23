@@ -2,8 +2,15 @@ from test_framework import generic_test
 
 
 def number_of_ways_to_top(top: int, maximum_step: int) -> int:
-    # TODO - you fill in here.
-    return 0
+    steps_to_reach = [float('inf')] * top + [1]
+
+    # Go over steps in reverse
+    for i in reversed(range(top)):
+        # Sum over each step size
+        steps_to_reach[i] = sum([steps_to_reach[i + step_size] 
+                                    for step_size in range(1, maximum_step + 1) 
+                                    if i + step_size <= top])
+    return steps_to_reach[0]
 
 
 if __name__ == '__main__':
