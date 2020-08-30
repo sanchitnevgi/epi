@@ -13,18 +13,11 @@ def even_odd(A: List[int]) -> None:
 
     even, odd = 0, len(A) - 1
     while even < odd:
-        # Move even pointer till odd element found
-        while even < odd and A[even] % 2 == 0:
+        if A[even] % 2 == 0:
             even += 1
-        # Move odd pointer till even element found
-        while even < odd and A[odd] % 2 == 1:
+        else:
+            A[even], A[odd] = A[odd], A[even]
             odd -= 1
-
-        # Check if not crossed and swap
-        A[even], A[odd] = A[odd], A[even]
-        # Increment pointers
-        even, odd = even + 1, odd - 1
-    return
 
 
 @enable_executor_hook
