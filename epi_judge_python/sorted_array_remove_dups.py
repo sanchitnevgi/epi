@@ -10,10 +10,10 @@ def delete_duplicates(A: List[int]) -> int:
     if not A:
         return 0
     to = 1
-    for i in range(1, len(A)):
-        if A[i] == A[i - 1]:
+    for idx in range(1, len(A)):
+        if A[idx] == A[idx - 1]:
             continue
-        A[to] = A[i]
+        A[to] = A[idx]
         to += 1
     return to
 

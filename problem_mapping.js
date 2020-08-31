@@ -2622,7 +2622,7 @@ problem_mapping = {
                 "total": 35
             },
             "Python: max_product_all_but_one.py": {
-                "passed": 0,
+                "passed": 35,
                 "total": 35
             }
         },
@@ -2636,7 +2636,7 @@ problem_mapping = {
                 "total": 100
             },
             "Python: longest_increasing_subarray.py": {
-                "passed": 0,
+                "passed": 100,
                 "total": 100
             }
         },

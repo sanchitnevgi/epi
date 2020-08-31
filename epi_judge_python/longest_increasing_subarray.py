@@ -7,8 +7,18 @@ Subarray = collections.namedtuple('Subarray', ('start', 'end'))
 
 
 def find_longest_increasing_subarray(A: List[int]) -> Subarray:
-    # TODO - you fill in here.
-    return Subarray(0, 0)
+    start = 0
+    max_subarray_len, max_subarray = 1, Subarray(0, 0)
+    for end in  range(1, len(A)):
+        # Non-Increasing 
+        if A[end] <= A[end - 1]:
+            start = end
+            continue
+        if end - start + 1 > max_subarray_len:
+            max_subarray_len = end - start + 1
+            max_subarray = Subarray(start, end)
+
+    return max_subarray
 
 
 def find_longest_increasing_subarray_wrapper(A):

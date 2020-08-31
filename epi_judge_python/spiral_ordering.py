@@ -2,8 +2,11 @@ from typing import List
 
 from test_framework import generic_test
 
-
 def matrix_in_spiral_order(square_matrix: List[List[int]]) -> List[int]:
+    def layer(offset):
+        square_matrix
+
+def matrix_in_spiral_order_(square_matrix: List[List[int]]) -> List[int]:
     n = len(square_matrix)
     total = n ** 2
     directions, cur_dir = [(0, 1), (1, 0), (0, -1), (-1, 0)], 0
