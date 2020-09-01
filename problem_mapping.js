@@ -2608,7 +2608,7 @@ problem_mapping = {
                 "total": 201
             },
             "Python: buy_and_sell_stock_k_times.py": {
-                "passed": 0,
+                "passed": 201,
                 "total": 201
             }
         },
@@ -2664,7 +2664,7 @@ problem_mapping = {
                 "total": 201
             },
             "Python: rook_attack.py": {
-                "passed": 0,
+                "passed": 201,
                 "total": 201
             }
         },
