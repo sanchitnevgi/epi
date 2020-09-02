@@ -3054,7 +3054,7 @@ problem_mapping = {
                 "total": 50
             },
             "Python: road_network.py": {
-                "passed": 0,
+                "passed": 50,
                 "total": 50
             }
         },

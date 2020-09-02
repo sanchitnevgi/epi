@@ -1,24 +1,29 @@
 from typing import List
-
+from collections import deque
 from test_framework import generic_test
 
 
-def flip_color(x: int, y: int, image: List[List[bool]]) -> None:
-    color = image[x][y]
+def flip_color(i: int, j: int, image: List[List[bool]]) -> None:
     ROWS, COLS = len(image), len(image[0])
+    color = image[i][j]
     directions = [(0, 1), (0, -1), (-1, 0), (1, 0)]
-    
-    def flip_helper(i, j):
-        if not (0 <= i < ROWS and 0 <= j < COLS and image[i][j] == color):  
-            return
 
-        image[i][j] = not color
+    def flip_helper(x, y):
+        image[x][y] = not color
 
+        # Add neighbours of i,j which are color
         for dx, dy in directions:
-            n_i, n_j = i + dx, j + dy
-            flip_helper(n_i, n_j)
+            nx, ny = x + dx, y + dy
 
-    flip_helper(x, y)
+            # Check invalid cells
+            if not (0 <= nx < ROWS and 0 <= ny < COLS and image[nx][ny] == color):
+                continue
+
+            flip_helper(nx, ny)
+
+    flip_helper(i, j)
+
+    
 
 def flip_color_wrapper(x, y, image):
     flip_color(x, y, image)

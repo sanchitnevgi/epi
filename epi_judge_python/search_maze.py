@@ -25,6 +25,7 @@ def search_maze(maze: List[List[int]], s: Coordinate,
         if not (0 <= node.x < ROWS and 0 <= node.y < COLS and maze[node.x][node.y] == WHITE):
             return False
         
+        # "Visit" this node
         path.append(node)
         maze[node.x][node.y] = BLACK
 
@@ -34,7 +35,7 @@ def search_maze(maze: List[List[int]], s: Coordinate,
         if any(maze_helper(Coordinate(node.x + dx, node.y + dy)) for dx, dy in directions):
             return True
 
-        del path[-1]
+        path.pop()
         return False
 
     maze_helper(s)
